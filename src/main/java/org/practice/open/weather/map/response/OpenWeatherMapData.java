@@ -1,4 +1,4 @@
-package org.practice.weather.map.response;
+package org.practice.open.weather.map.response;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @RegisterForReflection
-public class OpenWeatherMapResponseData {
+public class OpenWeatherMapData {
 
     Coord CoordObject;
     ArrayList < Weather > weather = new ArrayList < Weather > ();

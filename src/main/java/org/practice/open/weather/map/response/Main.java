@@ -1,4 +1,4 @@
-package org.practice.weather.map.response;
+package org.practice.open.weather.map.response;
 
 public class Main {
 	 private float temp;

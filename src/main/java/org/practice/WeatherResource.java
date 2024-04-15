@@ -4,8 +4,8 @@ import java.util.Optional;
 
 import org.practice.exception.ServiceException;
 
+import io.netty.util.internal.StringUtil;
 import io.quarkus.logging.Log;
-import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.QueryParam;
@@ -13,17 +13,25 @@ import jakarta.ws.rs.QueryParam;
 @Path("/weather")
 public class WeatherResource {
 
-@Inject
-private AppConfig appConfig;
+    private WeatherService weatherService;
+
+    public WeatherResource() {
+        weatherService = AppConfig.getInstance().getDependency(WeatherService.class);
+    }
 
     @GET()
-    public Optional<WeatherResponse> hello(@QueryParam(value = "cityName") String cityName) {
-        Log.info("Passing the request for getting the Weather Data for City: " + cityName);
-        Optional<WeatherResponse> response = appConfig.getWeatherService().findByCityName(cityName);
+    public Optional<WeatherResponse> getWeatherResponse(@QueryParam(value = "cityName") String cityName) {
+        if(StringUtil.isNullOrEmpty(cityName)) {
+            Log.error("Bad Request Exception Occurred - Invalid input param cityName: " + cityName);
+            throw new ServiceException("Bad Request - Invalid input param cityName");
+        }
+        Optional<WeatherResponse> response = weatherService.getWeatherResponse(cityName);
         if(response.isPresent()) {
-            return response;
+            Log.info("Successfully returning the Response---");
         } else {
+            Log.error("Service Exception Occurred - Unable to get the Resource");
             throw new ServiceException("Resource Not Found");
         }
+        return response;
     }
 }

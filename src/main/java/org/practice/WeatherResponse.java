@@ -8,10 +8,7 @@ public class WeatherResponse {
     private String message;
     private boolean success;
 
-    public WeatherResponse()
-    {
-    	
-    }
+    public WeatherResponse() {}
 
     WeatherResponse(String message) {
         this.success = true;
