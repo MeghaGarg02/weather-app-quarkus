@@ -13,9 +13,9 @@ public class WeatherService {
 
     private OpenWeatherMapUtil openWeatherMapUtil;
 
-    public WeatherService() {
-        weatherRepository = AppConfig.getInstance().getDependency(WeatherRepository.class);
-        openWeatherMapUtil = AppConfig.getInstance().getDependency(OpenWeatherMapUtil.class);
+    public WeatherService(WeatherRepository weatherRepository, OpenWeatherMapUtil openWeatherMapUtil) {
+        this.weatherRepository = weatherRepository;
+        this.openWeatherMapUtil = openWeatherMapUtil;
     }
 
     public Optional<WeatherResponse> getWeatherResponse(String cityName) {

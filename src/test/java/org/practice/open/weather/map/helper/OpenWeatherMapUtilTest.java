@@ -1,18 +1,26 @@
 package org.practice.open.weather.map.helper;
 
 import io.quarkus.test.junit.QuarkusTest;
+import jakarta.inject.Inject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
+import org.practice.WeatherAppProperties;
 import org.practice.open.weather.map.response.OpenWeatherMapData;
 
 @QuarkusTest
 class OpenWeatherMapUtilTest {
 
-    private OpenWeatherMapUtil openWeatherMapUtil = new OpenWeatherMapUtil();
+
+	@Inject
+	WeatherAppProperties weatherAppProperties;
+	
+	@Inject
+    private OpenWeatherMapUtil openWeatherMapUtil = new OpenWeatherMapUtil(weatherAppProperties);
+    
 
     private final String CITY_NAME_LONDON = "London";
 

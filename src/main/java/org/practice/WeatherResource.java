@@ -15,11 +15,11 @@ public class WeatherResource {
 
     private WeatherService weatherService;
 
-    public WeatherResource() {
-        weatherService = AppConfig.getInstance().getDependency(WeatherService.class);
+    public WeatherResource(WeatherService weatherService) {
+        this.weatherService = weatherService;
     }
 
-    @GET()
+	@GET()
     public Optional<WeatherResponse> getWeatherResponse(@QueryParam(value = "cityName") String cityName) {
         if(StringUtil.isNullOrEmpty(cityName)) {
             Log.error("Bad Request Exception Occurred - Invalid input param cityName: " + cityName);

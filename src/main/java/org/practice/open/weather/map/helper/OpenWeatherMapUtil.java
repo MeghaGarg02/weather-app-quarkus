@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.practice.AppConfig;
 import org.practice.WeatherAppProperties;
 import org.practice.exception.ServiceException;
 import org.practice.open.weather.map.response.OpenWeatherMapData;
@@ -19,8 +18,8 @@ public class OpenWeatherMapUtil {
 
     private WeatherAppProperties weatherAppProperties;
 
-    public OpenWeatherMapUtil() {
-        weatherAppProperties = AppConfig.getInstance().getDependency(WeatherAppProperties.class);
+    public OpenWeatherMapUtil(WeatherAppProperties weatherAppProperties) {
+        this.weatherAppProperties = weatherAppProperties;
     }
 
     public URL getURL(String cityName) {
